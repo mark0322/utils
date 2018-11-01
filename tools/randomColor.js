@@ -4,16 +4,23 @@
  * @return {String}
  */
 function randomColor(isRGB) {
-	let r = Math.random() * 256 | 0;
-	let g = Math.random() * 256 | 0;
-	let b = Math.random() * 256 | 0;
+	const r = random255(),
+				g = random255(),
+				b = random255();
+
 	if (isRGB) {
 		return `rgb(${r},${g},${b})`;
 	}
-	r = r < 17 ? '0' + r.toString(16) : r.toString(16);
-	g = g < 17 ? '0' + g.toString(16) : g.toString(16);
-	b = b < 17 ? '0' + b.toString(16) : b.toString(16);
-	return '#' + r + g + b;
+
+	return '#' + toHex(r) + toHex(g) + toHex(b);
 }
 
 export default randomColor;
+
+function toHex(n) {
+	return n = n < 17 ? '0' + n.toString(16) : n.toString(16);
+}
+
+function random255() {
+	return Math.random() * 256 | 0;
+}
